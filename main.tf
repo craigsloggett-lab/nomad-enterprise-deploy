@@ -42,7 +42,7 @@ data "aws_ami" "selected" {
 }
 
 module "nomad" {
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.2.1"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.2.2"
 
   project_name      = var.project_name
   route53_zone      = data.aws_route53_zone.nomad
