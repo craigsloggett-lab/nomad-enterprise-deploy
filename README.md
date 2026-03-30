@@ -31,7 +31,7 @@ repository from this template:
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_nomad"></a> [nomad](#module\_nomad) | ../terraform-aws-nomad-enterprise | n/a |
+| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | v0.2.0 |
 
 ## Inputs
 
@@ -45,6 +45,7 @@ repository from this template:
 | <a name="input_nomad_license"></a> [nomad\_license](#input\_nomad\_license) | Nomad Enterprise license string. | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name prefix for all resources. | `string` | n/a | yes |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | Name of the existing Route 53 hosted zone. | `string` | n/a | yes |
+| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Name tag of the existing VPC. | `string` | n/a | yes |
 
 ## Resources
 
@@ -52,12 +53,16 @@ repository from this template:
 |------|------|
 | [aws_ami.selected](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_route53_zone.nomad](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
+| [aws_subnets.private](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
+| [aws_subnets.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
+| [aws_vpc.selected](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_bastion_public_ip"></a> [bastion\_public\_ip](#output\_bastion\_public\_ip) | Public IP of the bastion host. |
+| <a name="output_ec2_ami_name"></a> [ec2\_ami\_name](#output\_ec2\_ami\_name) | Name of the AMI used for EC2 instances. |
 | <a name="output_nomad_ca_cert"></a> [nomad\_ca\_cert](#output\_nomad\_ca\_cert) | CA certificate for trusting the Nomad TLS chain. |
 | <a name="output_nomad_private_ips"></a> [nomad\_private\_ips](#output\_nomad\_private\_ips) | Private IPs of the Nomad nodes. |
 | <a name="output_nomad_target_group_arn"></a> [nomad\_target\_group\_arn](#output\_nomad\_target\_group\_arn) | ARN of the Nomad NLB target group. |

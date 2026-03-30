@@ -1,5 +1,6 @@
-project_name      = "nomad"
+project_name      = "lab"
 route53_zone_name = "example.com"
+vpc_name          = "hashistack"
 nomad_license     = "your-nomad-enterprise-license-here"
 
 ec2_key_pair_name = "my-key-pair"
