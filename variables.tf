@@ -45,3 +45,35 @@ variable "nomad_api_allowed_cidrs" {
   description = "CIDR blocks allowed to reach the Nomad API (port 4646) from outside the VPC. Only effective when nlb_internal is false."
   default     = []
 }
+
+# Consul Integration
+
+variable "consul_ca_cert_secret_arn" {
+  type        = string
+  description = "ARN of the Secrets Manager secret containing the Consul CA certificate. Obtain from consul-enterprise-deploy output."
+}
+
+variable "consul_gossip_key_secret_arn" {
+  type        = string
+  description = "ARN of the Secrets Manager secret containing the Consul gossip encryption key. Obtain from consul-enterprise-deploy output."
+}
+
+variable "consul_datacenter" {
+  type        = string
+  description = "Consul datacenter name."
+  default     = "dc1"
+}
+
+variable "consul_package_version" {
+  type        = string
+  description = "Consul Enterprise apt package version for the local client agent."
+  default     = "1.22.6+ent-1"
+}
+
+# Nomad Client Nodes
+
+variable "client_count" {
+  type        = number
+  description = "Number of Nomad client nodes to deploy."
+  default     = 3
+}

@@ -28,3 +28,8 @@ output "nomad_ca_cert" {
   value       = module.nomad.nomad_ca_cert
   sensitive   = true
 }
+
+output "nomad_client_private_ips" {
+  description = "Private IPs of the Nomad client nodes."
+  value       = module.nomad.nomad_client_private_ips
+}
