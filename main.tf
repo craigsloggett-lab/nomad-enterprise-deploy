@@ -57,6 +57,7 @@ data "aws_secretsmanager_secret" "consul_gossip_key" {
 }
 
 module "nomad" {
+  # tflint-ignore: terraform_module_pinned_source
   source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=8cc4d9841f1f1ca69e6cc20cafd3b7a1fae4fe7a"
 
   project_name      = var.project_name
