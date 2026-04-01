@@ -63,16 +63,24 @@ variable "consul_token_secret_arn" {
   description = "ARN of the Secrets Manager secret containing the Consul ACL token for Nomad. Obtain from consul-enterprise-admin."
 }
 
+variable "consul_auto_join_ec2_tag" {
+  type = object({
+    key   = string
+    value = string
+  })
+  description = "EC2 tag used for Consul cloud auto-join. Obtain from consul-enterprise-deploy output."
+}
+
 variable "consul_datacenter" {
   type        = string
   description = "Consul datacenter name."
   default     = "dc1"
 }
 
-variable "consul_package_version" {
+variable "consul_version" {
   type        = string
-  description = "Consul Enterprise apt package version for the local client agent."
-  default     = "1.22.6+ent-1"
+  description = "Consul Enterprise release version for the local client agent."
+  default     = "1.22.6+ent"
 }
 
 # Nomad Client Nodes

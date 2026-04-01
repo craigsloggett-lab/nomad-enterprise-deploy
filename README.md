@@ -31,18 +31,19 @@ repository from this template:
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | 0d491ed5440ddb3b99f295a0c50789f95d29a413 |
+| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | v0.4.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_client_count"></a> [client\_count](#input\_client\_count) | Number of Nomad client nodes to deploy. | `number` | `3` | no |
+| <a name="input_consul_auto_join_ec2_tag"></a> [consul\_auto\_join\_ec2\_tag](#input\_consul\_auto\_join\_ec2\_tag) | EC2 tag used for Consul cloud auto-join. Obtain from consul-enterprise-deploy output. | <pre>object({<br/>    key   = string<br/>    value = string<br/>  })</pre> | n/a | yes |
 | <a name="input_consul_ca_cert_secret_arn"></a> [consul\_ca\_cert\_secret\_arn](#input\_consul\_ca\_cert\_secret\_arn) | ARN of the Secrets Manager secret containing the Consul CA certificate. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
 | <a name="input_consul_datacenter"></a> [consul\_datacenter](#input\_consul\_datacenter) | Consul datacenter name. | `string` | `"dc1"` | no |
 | <a name="input_consul_gossip_key_secret_arn"></a> [consul\_gossip\_key\_secret\_arn](#input\_consul\_gossip\_key\_secret\_arn) | ARN of the Secrets Manager secret containing the Consul gossip encryption key. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
-| <a name="input_consul_package_version"></a> [consul\_package\_version](#input\_consul\_package\_version) | Consul Enterprise apt package version for the local client agent. | `string` | `"1.22.6+ent-1"` | no |
 | <a name="input_consul_token_secret_arn"></a> [consul\_token\_secret\_arn](#input\_consul\_token\_secret\_arn) | ARN of the Secrets Manager secret containing the Consul ACL token for Nomad. Obtain from consul-enterprise-admin. | `string` | n/a | yes |
+| <a name="input_consul_version"></a> [consul\_version](#input\_consul\_version) | Consul Enterprise release version for the local client agent. | `string` | `"1.22.6+ent"` | no |
 | <a name="input_ec2_ami_name"></a> [ec2\_ami\_name](#input\_ec2\_ami\_name) | Name filter for the AMI (supports wildcards). | `string` | n/a | yes |
 | <a name="input_ec2_ami_owner"></a> [ec2\_ami\_owner](#input\_ec2\_ami\_owner) | AWS account ID of the AMI owner. | `string` | n/a | yes |
 | <a name="input_ec2_key_pair_name"></a> [ec2\_key\_pair\_name](#input\_ec2\_key\_pair\_name) | Name of an existing EC2 key pair for SSH access. | `string` | n/a | yes |

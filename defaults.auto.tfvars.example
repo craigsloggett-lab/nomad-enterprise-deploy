@@ -7,6 +7,11 @@ ec2_key_pair_name = "my-key-pair"
 ec2_ami_owner     = "123456789012"
 ec2_ami_name      = "ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"
 
+consul_auto_join_ec2_tag = {
+  key   = "consul-cluster"
+  value = "lab"
+}
+
 consul_ca_cert_secret_arn    = "arn:aws:secretsmanager:us-east-1:123456789012:secret:example-ca-cert"
 consul_gossip_key_secret_arn = "arn:aws:secretsmanager:us-east-1:123456789012:secret:example-gossip-key"
 consul_token_secret_arn      = "arn:aws:secretsmanager:us-east-1:123456789012:secret:example-token"
