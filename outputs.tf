@@ -8,9 +8,9 @@ output "bastion_public_ip" {
   value       = module.nomad.bastion_public_ip
 }
 
-output "nomad_private_ips" {
-  description = "Private IPs of the Nomad nodes."
-  value       = module.nomad.nomad_private_ips
+output "nomad_server_private_ips" {
+  description = "Private IPs of the Nomad server nodes."
+  value       = module.nomad.nomad_server_private_ips
 }
 
 output "nomad_target_group_arn" {
