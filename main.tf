@@ -61,7 +61,7 @@ data "aws_secretsmanager_secret" "consul_token" {
 }
 
 module "nomad" {
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.4.1"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.4.2"
 
   project_name      = var.project_name
   route53_zone      = data.aws_route53_zone.nomad
