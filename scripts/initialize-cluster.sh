@@ -48,7 +48,7 @@ wait_for_nomad() {
   attempts=0
   max_attempts=30
   while ! remote_exec "${first_nomad_ip}" \
-    "sudo curl -sf --cacert /etc/nomad.d/tls/nomad-ca.pem https://${first_nomad_ip}:4646/v1/status/leader" >/dev/null 2>&1; do
+    "sudo curl -sf --cacert /etc/nomad.d/tls/nomad-ca.pem --resolve ${tls_server_name}:4646:${first_nomad_ip} https://${tls_server_name}:4646/v1/status/leader" >/dev/null 2>&1; do
     attempts=$((attempts + 1))
     if [ "${attempts}" -ge "${max_attempts}" ]; then
       log "ERROR: Nomad not reachable after ${max_attempts} attempts."
