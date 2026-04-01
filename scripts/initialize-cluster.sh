@@ -78,8 +78,8 @@ bootstrap_acl() {
       -client-cert=/etc/nomad.d/tls/nomad-server.pem \
       -client-key=/etc/nomad.d/tls/nomad-server-key.pem \
       -tls-server-name=${tls_server_name} \
-      -json" \
-    >"${init_file}" 2>/dev/null; then
+      -json" 2>/dev/null | jq . \
+    >"${init_file}"; then
     log "ACL bootstrap complete."
     log "IMPORTANT: The bootstrap token has been saved to nomad-init.json." "" "!!"
     log "           Store this file securely and delete it from disk." "" "  "
