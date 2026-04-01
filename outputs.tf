@@ -29,7 +29,7 @@ output "nomad_ca_cert" {
   sensitive   = true
 }
 
-output "nomad_client_private_ips" {
-  description = "Private IPs of the Nomad client nodes."
-  value       = module.nomad.nomad_client_private_ips
+output "nomad_client_asg_name" {
+  description = "Name of the Nomad client Auto Scaling Group."
+  value       = module.nomad.nomad_client_asg_name
 }

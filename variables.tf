@@ -58,6 +58,11 @@ variable "consul_gossip_key_secret_arn" {
   description = "ARN of the Secrets Manager secret containing the Consul gossip encryption key. Obtain from consul-enterprise-deploy output."
 }
 
+variable "consul_token_secret_arn" {
+  type        = string
+  description = "ARN of the Secrets Manager secret containing the Consul ACL token for Nomad. Obtain from consul-enterprise-admin."
+}
+
 variable "consul_datacenter" {
   type        = string
   description = "Consul datacenter name."

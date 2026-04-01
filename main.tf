@@ -56,9 +56,13 @@ data "aws_secretsmanager_secret" "consul_gossip_key" {
   arn = var.consul_gossip_key_secret_arn
 }
 
+data "aws_secretsmanager_secret" "consul_token" {
+  arn = var.consul_token_secret_arn
+}
+
 module "nomad" {
   # tflint-ignore: terraform_module_pinned_source
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=c8b9275578b52fb9b9264e727e017344e7db0f14"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=0d491ed5440ddb3b99f295a0c50789f95d29a413"
 
   project_name      = var.project_name
   route53_zone      = data.aws_route53_zone.nomad
@@ -75,6 +79,7 @@ module "nomad" {
   consul_security_group    = data.aws_security_group.consul
   consul_ca_cert_secret    = data.aws_secretsmanager_secret.consul_ca_cert
   consul_gossip_key_secret = data.aws_secretsmanager_secret.consul_gossip_key
+  consul_token_secret      = data.aws_secretsmanager_secret.consul_token
   consul_retry_join        = "provider=aws tag_key=consul-cluster tag_value=${var.project_name}"
   consul_datacenter        = var.consul_datacenter
   consul_package_version   = var.consul_package_version
