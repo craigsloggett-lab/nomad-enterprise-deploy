@@ -11,7 +11,7 @@ read_terraform_outputs() {
 
   repo_root="$(cd "$(dirname "$0")/.." && pwd)"
   bastion_ip=$(cd "${repo_root}" && terraform output -raw bastion_public_ip)
-  nomad_ips=$(cd "${repo_root}" && terraform output -json nomad_private_ips | jq -r '.[]')
+  nomad_ips=$(cd "${repo_root}" && terraform output -json nomad_server_private_ips | jq -r '.[]')
   ami_name=$(cd "${repo_root}" && terraform output -raw ec2_ami_name)
 
   first_nomad_ip=$(printf '%s\n' "${nomad_ips}" | head -1)
