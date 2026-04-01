@@ -41,8 +41,27 @@ data "aws_ami" "selected" {
   }
 }
 
+data "aws_security_group" "consul" {
+  filter {
+    name   = "tag:Name"
+    values = ["${var.project_name}-consul"]
+  }
+}
+
+data "aws_secretsmanager_secret" "consul_ca_cert" {
+  arn = var.consul_ca_cert_secret_arn
+}
+
+data "aws_secretsmanager_secret" "consul_gossip_key" {
+  arn = var.consul_gossip_key_secret_arn
+}
+
+data "aws_secretsmanager_secret" "consul_token" {
+  arn = var.consul_token_secret_arn
+}
+
 module "nomad" {
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.3.0"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.4.0"
 
   project_name      = var.project_name
   route53_zone      = data.aws_route53_zone.nomad
@@ -56,6 +75,15 @@ module "nomad" {
     public_subnet_ids  = data.aws_subnets.public.ids
   }
 
+  consul_security_group    = data.aws_security_group.consul
+  consul_ca_cert_secret    = data.aws_secretsmanager_secret.consul_ca_cert
+  consul_gossip_key_secret = data.aws_secretsmanager_secret.consul_gossip_key
+  consul_token_secret      = data.aws_secretsmanager_secret.consul_token
+  consul_auto_join_ec2_tag = var.consul_auto_join_ec2_tag
+  consul_datacenter        = var.consul_datacenter
+  consul_version           = var.consul_version
+
+  client_count            = var.client_count
   nlb_internal            = var.nlb_internal
   nomad_api_allowed_cidrs = var.nomad_api_allowed_cidrs
 }
