@@ -38,3 +38,13 @@ output "nomad_intro_token_secret_arn" {
   description = "ARN of the Secrets Manager secret for the client introduction ACL token."
   value       = module.nomad.nomad_intro_token_secret_arn
 }
+
+output "nomad_snapshot_token_secret_arn" {
+  description = "ARN of the Secrets Manager secret for the snapshot agent ACL token."
+  value       = module.nomad.nomad_snapshot_token_secret_arn
+}
+
+output "nomad_autoscaler_token_secret_arn" {
+  description = "ARN of the Secrets Manager secret for the autoscaler ACL token."
+  value       = module.nomad.nomad_autoscaler_token_secret_arn
+}
