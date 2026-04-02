@@ -127,7 +127,7 @@ create_agent_tokens() {
   # Create snapshot agent policy and token.
   log "Creating snapshot agent ACL policy and token."
 
-  nomad_api POST /v1/acl/policy/nomad-snapshot \
+  nomad_api PUT /v1/acl/policy/nomad-snapshot \
     '{"Name":"nomad-snapshot","Description":"Nomad snapshot agent","Rules":"namespace \"*\" { policy = \"read\" }\noperator { policy = \"write\" }\nagent { policy = \"read\" }"}' \
     >/dev/null 2>&1 || true
 
@@ -149,7 +149,7 @@ create_agent_tokens() {
   # Create autoscaler policy and token.
   log "Creating autoscaler ACL policy and token."
 
-  nomad_api POST /v1/acl/policy/nomad-autoscaler \
+  nomad_api PUT /v1/acl/policy/nomad-autoscaler \
     '{"Name":"nomad-autoscaler","Description":"Nomad autoscaler agent","Rules":"namespace \"*\" { policy = \"scale\" }\noperator { policy = \"read\" }\nnode { policy = \"read\" }"}' \
     >/dev/null 2>&1 || true
 
@@ -172,23 +172,16 @@ create_agent_tokens() {
 }
 
 create_introduction_token() {
-  init_file="$(cd "$(dirname "$0")" && pwd)/nomad-init.json"
-  bootstrap_token=$(jq -r '.SecretID' "${init_file}")
-
-  # Create a minimal policy for the client-introduction role.
+  # Create the client-introduction role and token.
   # The role name "client-introduction" is the well-known name referenced
   # by the server's client_introduction config block.
-  log "Creating client introduction ACL policy, role, and token."
+  log "Creating client introduction ACL role and token."
 
-  nomad_api POST /v1/acl/policy/client-introduction \
-    '{"Name":"client-introduction","Description":"Minimal policy for client introduction role","Rules":"node { policy = \"read\" }"}' \
+  nomad_api PUT /v1/acl/role \
+    '{"Name":"client-introduction","Description":"Role for client node introduction tokens"}' \
     >/dev/null 2>&1 || true
 
-  nomad_api POST /v1/acl/role \
-    '{"Name":"client-introduction","Description":"Role for client node introduction tokens","Policies":[{"Name":"client-introduction"}]}' \
-    >/dev/null 2>&1 || true
-
-  intro_token=$(nomad_api PUT /v1/acl/token \
+  intro_token=$(nomad_api POST /v1/acl/token \
     '{"Name":"Client Introduction Token","Type":"client","Roles":[{"Name":"client-introduction"}]}' |
     jq -r '.SecretID')
 
