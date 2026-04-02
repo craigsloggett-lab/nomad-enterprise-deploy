@@ -178,10 +178,14 @@ create_introduction_token() {
   # Create the client-introduction role and token.
   # The role name "client-introduction" is the well-known name referenced
   # by the server's client_introduction config block.
-  log "Creating client introduction ACL role and token."
+  log "Creating client introduction ACL policy, role, and token."
+
+  nomad_api PUT /v1/acl/policy/client-introduction \
+    '{"Name":"client-introduction","Description":"Policy for client introduction role","Rules":"node { policy = \"write\" }"}' \
+    >/dev/null 2>&1 || true
 
   nomad_api POST /v1/acl/role \
-    '{"Name":"client-introduction","Description":"Role for client node introduction tokens"}' \
+    '{"Name":"client-introduction","Description":"Role for client node introduction tokens","Policies":[{"Name":"client-introduction"}]}' \
     >/dev/null 2>&1 || true
 
   intro_token=$(nomad_api POST /v1/acl/token \
