@@ -33,3 +33,8 @@ output "nomad_client_asg_name" {
   description = "Name of the Nomad client Auto Scaling Group."
   value       = module.nomad.nomad_client_asg_name
 }
+
+output "nomad_intro_token_secret_arn" {
+  description = "ARN of the Secrets Manager secret for the client introduction ACL token."
+  value       = module.nomad.nomad_intro_token_secret_arn
+}
