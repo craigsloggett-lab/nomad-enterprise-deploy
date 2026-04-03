@@ -176,13 +176,17 @@ create_agent_tokens() {
 }
 
 create_introduction_token() {
-  # Create the client-introduction role and token.
-  # The role name "client-introduction" is the well-known name referenced
-  # by the server's client_introduction config block.
-  log "Creating client introduction ACL role and token."
+  # Create the client-introduction policy, role, and token.
+  # The policy grants node:write which is required to call the
+  # /v1/acl/identity/client-introduction-token endpoint.
+  log "Creating client introduction ACL policy, role, and token."
+
+  nomad_api PUT /v1/acl/policy/client-introduction \
+    '{"Name":"client-introduction","Description":"Policy for client introduction role","Rules":"node { policy = \"write\" }"}' \
+    >/dev/null 2>&1 || true
 
   nomad_api POST /v1/acl/role \
-    '{"Name":"client-introduction","Description":"Role for client node introduction tokens"}' \
+    '{"Name":"client-introduction","Description":"Role for client node introduction tokens","Policies":[{"Name":"client-introduction"}]}' \
     >/dev/null 2>&1 || true
 
   intro_token=$(nomad_api POST /v1/acl/token \
@@ -213,6 +217,14 @@ restart_and_enable_agents() {
 
   # Wait for the cluster to stabilize after restart.
   sleep 10
+
+  for ip in ${nomad_ips}; do
+    log "  Updating agent tokens on ${ip}."
+    remote_exec "${ip}" \
+      "sudo sed -i 's|token.*=.*\"\"|token           = \"${snapshot_token}\"|' /etc/nomad-snapshot-agent.d/snapshot-agent.hcl"
+    remote_exec "${ip}" \
+      "sudo sed -i 's|token.*=.*\"\"|token     = \"${autoscaler_token}\"|' /etc/nomad-autoscaler.d/autoscaler.hcl"
+  done
 
   for ip in ${nomad_ips}; do
     log "  Enabling snapshot agent and autoscaler on ${ip}."
