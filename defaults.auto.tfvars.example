@@ -16,5 +16,9 @@ consul_ca_cert_secret_arn    = "arn:aws:secretsmanager:us-east-1:123456789012:se
 consul_gossip_key_secret_arn = "arn:aws:secretsmanager:us-east-1:123456789012:secret:example-gossip-key"
 consul_token_secret_arn      = "arn:aws:secretsmanager:us-east-1:123456789012:secret:example-token"
 
+nomad_server_service_name   = "nomad-server"
+nomad_client_service_name   = "nomad-client"
+nomad_snapshot_service_name = "nomad-snapshot"
+
 nlb_internal            = false
 nomad_api_allowed_cidrs = ["0.0.0.0/0"]
