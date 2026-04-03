@@ -15,16 +15,16 @@ read_terraform_outputs() {
   client_asg_name=$(cd "${repo_root}" && terraform output -raw nomad_client_asg_name)
   ami_name=$(cd "${repo_root}" && terraform output -raw ec2_ami_name)
 
-  instance_ids=$(aws autoscaling describe-auto-scaling-groups \
+  instance_ids=$(bastion_exec aws autoscaling describe-auto-scaling-groups \
     --auto-scaling-group-names "${client_asg_name}" \
-    --query 'AutoScalingGroups[0].Instances[].InstanceId' \
+    --query "'AutoScalingGroups[0].Instances[].InstanceId'" \
     --output text)
 
   if [ -n "${instance_ids}" ]; then
     # shellcheck disable=SC2086
-    client_ips=$(aws ec2 describe-instances \
+    client_ips=$(bastion_exec aws ec2 describe-instances \
       --instance-ids ${instance_ids} \
-      --query 'Reservations[].Instances[].PrivateIpAddress' \
+      --query "'Reservations[].Instances[].PrivateIpAddress'" \
       --output text | tr '\t' '\n')
   fi
 
@@ -41,6 +41,11 @@ read_terraform_outputs() {
   log "  Nomad servers:" "$(printf '%s\n' "${server_ips}" | tr '\n' ' ')"
   log "  Nomad clients:" "$(printf '%s\n' "${client_ips}" | tr '\n' ' ')"
   log "  SSH user:" "${ssh_user}"
+}
+
+bastion_exec() {
+  # shellcheck disable=SC2029,SC2086
+  ssh ${ssh_opts} "${ssh_user}@${bastion_ip}" "$@"
 }
 
 remote_exec() {
