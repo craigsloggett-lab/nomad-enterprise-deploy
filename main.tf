@@ -62,7 +62,7 @@ data "aws_secretsmanager_secret" "consul_token" {
 
 module "nomad" {
   # tflint-ignore: terraform_module_pinned_source
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=60de0a6a9dabb59ce25027a11b2818c73bb204de"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=57b1dce87e3d4377e576e7039ad6d55d89e3e6f3"
 
   project_name      = var.project_name
   route53_zone      = data.aws_route53_zone.nomad
@@ -83,6 +83,9 @@ module "nomad" {
   consul_auto_join_ec2_tag = var.consul_auto_join_ec2_tag
   consul_datacenter        = var.consul_datacenter
   consul_version           = var.consul_version
+
+  nomad_server_service_name = var.nomad_server_service_name
+  nomad_client_service_name = var.nomad_client_service_name
 
   client_count            = var.client_count
   nlb_internal            = var.nlb_internal

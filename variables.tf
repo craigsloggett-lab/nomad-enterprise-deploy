@@ -83,6 +83,16 @@ variable "consul_version" {
   default     = "1.22.6+ent"
 }
 
+variable "nomad_server_service_name" {
+  type        = string
+  description = "Consul service name Nomad servers register as. Obtain from consul-enterprise-deploy output."
+}
+
+variable "nomad_client_service_name" {
+  type        = string
+  description = "Consul service name Nomad clients register as. Obtain from consul-enterprise-deploy output."
+}
+
 # Nomad Client Nodes
 
 variable "client_count" {
