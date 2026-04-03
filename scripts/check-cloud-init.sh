@@ -15,18 +15,13 @@ read_terraform_outputs() {
   client_asg_name=$(cd "${repo_root}" && terraform output -raw nomad_client_asg_name)
   ami_name=$(cd "${repo_root}" && terraform output -raw ec2_ami_name)
 
-  instance_ids=$(bastion_exec aws autoscaling describe-auto-scaling-groups \
-    --auto-scaling-group-names "${client_asg_name}" \
-    --query "'AutoScalingGroups[0].Instances[].InstanceId'" \
-    --output text)
-
-  if [ -n "${instance_ids}" ]; then
-    # shellcheck disable=SC2086
-    client_ips=$(bastion_exec aws ec2 describe-instances \
-      --instance-ids ${instance_ids} \
-      --query "'Reservations[].Instances[].PrivateIpAddress'" \
-      --output text | tr '\t' '\n')
-  fi
+  client_ips=$(aws ec2 describe-instances \
+    --region us-east-1 \
+    --filters \
+    "Name=tag:aws:autoscaling:groupName,Values=${client_asg_name}" \
+    "Name=instance-state-name,Values=running" \
+    --query 'Reservations[].Instances[].PrivateIpAddress' \
+    --output text | tr '\t' '\n')
 
   case "${ami_name}" in
     *ubuntu*) ssh_user="ubuntu" ;;
