@@ -46,6 +46,12 @@ variable "nomad_api_allowed_cidrs" {
   default     = []
 }
 
+variable "nomad_instance_type" {
+  type        = string
+  description = "EC2 instance type for Nomad nodes."
+  default     = "m5.large"
+}
+
 # Consul Integration
 
 variable "consul_ca_cert_secret_arn" {
@@ -104,4 +110,10 @@ variable "client_count" {
   type        = number
   description = "Number of Nomad client nodes to deploy."
   default     = 3
+}
+
+variable "client_instance_type" {
+  type        = string
+  description = "EC2 instance type for Nomad client nodes."
+  default     = "m5.large"
 }

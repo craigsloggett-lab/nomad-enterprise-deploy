@@ -38,6 +38,7 @@ repository from this template:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_client_count"></a> [client\_count](#input\_client\_count) | Number of Nomad client nodes to deploy. | `number` | `3` | no |
+| <a name="input_client_instance_type"></a> [client\_instance\_type](#input\_client\_instance\_type) | EC2 instance type for Nomad client nodes. | `string` | `"m5.large"` | no |
 | <a name="input_consul_auto_join_ec2_tag"></a> [consul\_auto\_join\_ec2\_tag](#input\_consul\_auto\_join\_ec2\_tag) | EC2 tag used for Consul cloud auto-join. Obtain from consul-enterprise-deploy output. | <pre>object({<br/>    key   = string<br/>    value = string<br/>  })</pre> | n/a | yes |
 | <a name="input_consul_ca_cert_secret_arn"></a> [consul\_ca\_cert\_secret\_arn](#input\_consul\_ca\_cert\_secret\_arn) | ARN of the Secrets Manager secret containing the Consul CA certificate. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
 | <a name="input_consul_datacenter"></a> [consul\_datacenter](#input\_consul\_datacenter) | Consul datacenter name. | `string` | `"dc1"` | no |
@@ -50,6 +51,7 @@ repository from this template:
 | <a name="input_nlb_internal"></a> [nlb\_internal](#input\_nlb\_internal) | Whether the NLB is internal. | `bool` | `true` | no |
 | <a name="input_nomad_api_allowed_cidrs"></a> [nomad\_api\_allowed\_cidrs](#input\_nomad\_api\_allowed\_cidrs) | CIDR blocks allowed to reach the Nomad API (port 4646) from outside the VPC. Only effective when nlb\_internal is false. | `list(string)` | `[]` | no |
 | <a name="input_nomad_client_service_name"></a> [nomad\_client\_service\_name](#input\_nomad\_client\_service\_name) | Consul service name Nomad clients register as. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
+| <a name="input_nomad_instance_type"></a> [nomad\_instance\_type](#input\_nomad\_instance\_type) | EC2 instance type for Nomad nodes. | `string` | `"m5.large"` | no |
 | <a name="input_nomad_license"></a> [nomad\_license](#input\_nomad\_license) | Nomad Enterprise license string. | `string` | n/a | yes |
 | <a name="input_nomad_server_service_name"></a> [nomad\_server\_service\_name](#input\_nomad\_server\_service\_name) | Consul service name Nomad servers register as. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
 | <a name="input_nomad_snapshot_service_name"></a> [nomad\_snapshot\_service\_name](#input\_nomad\_snapshot\_service\_name) | Consul service name the Nomad snapshot agent registers as. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
