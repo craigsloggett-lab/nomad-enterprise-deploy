@@ -63,12 +63,12 @@ data "aws_secretsmanager_secret" "consul_token" {
 module "nomad" {
   source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.5.4"
 
-  project_name        = var.project_name
-  route53_zone        = data.aws_route53_zone.nomad
-  nomad_license       = var.nomad_license
-  ec2_key_pair_name   = var.ec2_key_pair_name
-  ec2_ami             = data.aws_ami.selected
-  nomad_instance_type = var.nomad_instance_type
+  project_name               = var.project_name
+  route53_zone               = data.aws_route53_zone.nomad
+  nomad_license              = var.nomad_license
+  ec2_key_pair_name          = var.ec2_key_pair_name
+  ec2_ami                    = data.aws_ami.selected
+  nomad_server_instance_type = var.nomad_server_instance_type
 
   existing_vpc = {
     vpc_id             = data.aws_vpc.selected.id
@@ -88,8 +88,8 @@ module "nomad" {
   nomad_client_service_name   = var.nomad_client_service_name
   nomad_snapshot_service_name = var.nomad_snapshot_service_name
 
-  client_count            = var.client_count
-  nlb_internal            = var.nlb_internal
-  nomad_api_allowed_cidrs = var.nomad_api_allowed_cidrs
-  client_instance_type    = var.client_instance_type
+  client_count               = var.client_count
+  nlb_internal               = var.nlb_internal
+  nomad_api_allowed_cidrs    = var.nomad_api_allowed_cidrs
+  nomad_client_instance_type = var.nomad_client_instance_type
 }

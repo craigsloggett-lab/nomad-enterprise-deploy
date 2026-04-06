@@ -46,9 +46,9 @@ variable "nomad_api_allowed_cidrs" {
   default     = []
 }
 
-variable "nomad_instance_type" {
+variable "nomad_server_instance_type" {
   type        = string
-  description = "EC2 instance type for Nomad nodes."
+  description = "EC2 instance type for Nomad server nodes."
   default     = "m5.large"
 }
 
@@ -112,7 +112,7 @@ variable "client_count" {
   default     = 3
 }
 
-variable "client_instance_type" {
+variable "nomad_client_instance_type" {
   type        = string
   description = "EC2 instance type for Nomad client nodes."
   default     = "m5.large"
