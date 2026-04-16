@@ -61,7 +61,8 @@ data "aws_secretsmanager_secret" "consul_token" {
 }
 
 module "nomad" {
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.5.6"
+  # tflint-ignore: terraform_module_pinned_source
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=6363899cac1bb6cced1d16a0cde82bbb9c516b62"
 
   project_name               = var.project_name
   route53_zone               = data.aws_route53_zone.nomad
