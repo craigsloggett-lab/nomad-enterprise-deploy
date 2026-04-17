@@ -8,10 +8,10 @@ output "bastion_public_ip" {
   value       = module.nomad.bastion_public_ip
 }
 
-output "nomad_server_private_ips" {
-  description = "Private IPs of the Nomad server nodes."
-  value       = module.nomad.nomad_server_private_ips
-}
+#output "nomad_server_private_ips" {
+#  description = "Private IPs of the Nomad server nodes."
+#  value       = module.nomad.nomad_server_private_ips
+#}
 
 output "nomad_target_group_arn" {
   description = "ARN of the Nomad NLB target group."
@@ -29,10 +29,10 @@ output "nomad_ca_cert" {
   sensitive   = true
 }
 
-output "nomad_client_asg_name" {
-  description = "Name of the Nomad client Auto Scaling Group."
-  value       = module.nomad.nomad_client_asg_name
-}
+#output "nomad_client_asg_name" {
+#  description = "Name of the Nomad client Auto Scaling Group."
+#  value       = module.nomad.nomad_client_asg_name
+#}
 
 output "nomad_intro_token_secret_arn" {
   description = "ARN of the Secrets Manager secret for the client introduction ACL token."
