@@ -117,3 +117,20 @@ variable "nomad_client_instance_type" {
   description = "EC2 instance type for Nomad client nodes."
   default     = "m5.large"
 }
+
+# Vault Integration
+
+variable "vault_url" {
+  type        = string
+  description = "Vault cluster URL (e.g., https://vault.example.com). Obtain from vault-enterprise-deploy output."
+}
+
+variable "vault_tls_ca_bundle_ssm_name" {
+  type        = string
+  description = "SSM parameter name holding the Vault cluster's TLS CA bundle. Obtain from vault-enterprise-deploy output."
+}
+
+variable "vault_iam_role_name" {
+  type        = string
+  description = "Name of the IAM role attached to Vault server nodes. Obtain from vault-enterprise-deploy output."
+}

@@ -31,7 +31,7 @@ repository from this template:
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
-| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | 6363899cac1bb6cced1d16a0cde82bbb9c516b62 |
+| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | 46386bb4996ebe6499b6f7034e48ce2db7a3c34b |
 
 ## Inputs
 
@@ -57,6 +57,9 @@ repository from this template:
 | <a name="input_nomad_snapshot_service_name"></a> [nomad\_snapshot\_service\_name](#input\_nomad\_snapshot\_service\_name) | Consul service name the Nomad snapshot agent registers as. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name prefix for all resources. | `string` | n/a | yes |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | Name of the existing Route 53 hosted zone. | `string` | n/a | yes |
+| <a name="input_vault_iam_role_name"></a> [vault\_iam\_role\_name](#input\_vault\_iam\_role\_name) | Name of the IAM role attached to Vault server nodes. Obtain from vault-enterprise-deploy output. | `string` | n/a | yes |
+| <a name="input_vault_tls_ca_bundle_ssm_name"></a> [vault\_tls\_ca\_bundle\_ssm\_name](#input\_vault\_tls\_ca\_bundle\_ssm\_name) | SSM parameter name holding the Vault cluster's TLS CA bundle. Obtain from vault-enterprise-deploy output. | `string` | n/a | yes |
+| <a name="input_vault_url"></a> [vault\_url](#input\_vault\_url) | Vault cluster URL (e.g., https://vault.example.com). Obtain from vault-enterprise-deploy output. | `string` | n/a | yes |
 | <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | Name tag of the existing VPC. | `string` | n/a | yes |
 
 ## Resources

@@ -20,5 +20,9 @@ nomad_server_service_name   = "nomad-server"
 nomad_client_service_name   = "nomad-client"
 nomad_snapshot_service_name = "nomad-snapshot"
 
+vault_url                    = "https://vault.example.com"
+vault_tls_ca_bundle_ssm_name = "/lab/vault/tls-ca-bundle"
+vault_iam_role_name          = "lab-vault-server"
+
 nlb_internal            = false
 nomad_api_allowed_cidrs = ["0.0.0.0/0"]

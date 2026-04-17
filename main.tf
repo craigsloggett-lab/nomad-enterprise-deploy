@@ -62,7 +62,7 @@ data "aws_secretsmanager_secret" "consul_token" {
 
 module "nomad" {
   # tflint-ignore: terraform_module_pinned_source
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=6363899cac1bb6cced1d16a0cde82bbb9c516b62"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=46386bb4996ebe6499b6f7034e48ce2db7a3c34b"
 
   project_name               = var.project_name
   route53_zone               = data.aws_route53_zone.nomad
@@ -88,6 +88,10 @@ module "nomad" {
   nomad_server_service_name   = var.nomad_server_service_name
   nomad_client_service_name   = var.nomad_client_service_name
   nomad_snapshot_service_name = var.nomad_snapshot_service_name
+
+  vault_url                    = var.vault_url
+  vault_tls_ca_bundle_ssm_name = var.vault_tls_ca_bundle_ssm_name
+  vault_iam_role_name          = var.vault_iam_role_name
 
   client_count               = var.client_count
   nlb_internal               = var.nlb_internal
