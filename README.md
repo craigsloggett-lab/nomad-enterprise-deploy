@@ -31,7 +31,7 @@ repository from this template:
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
-| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | 896d205fd2d301194e83e3d655fa3b0fb9ea758f |
+| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | c706726cf85163306b82942ac01342b7fe44be95 |
 
 ## Inputs
 
