@@ -31,7 +31,7 @@ repository from this template:
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
-| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | 46386bb4996ebe6499b6f7034e48ce2db7a3c34b |
+| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | c3af3eb45c79b1692c169e4383fb57d2faef3f95 |
 
 ## Inputs
 
@@ -39,7 +39,6 @@ repository from this template:
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_client_count"></a> [client\_count](#input\_client\_count) | Number of Nomad client nodes to deploy. | `number` | `3` | no |
 | <a name="input_consul_auto_join_ec2_tag"></a> [consul\_auto\_join\_ec2\_tag](#input\_consul\_auto\_join\_ec2\_tag) | EC2 tag used for Consul cloud auto-join. Obtain from consul-enterprise-deploy output. | <pre>object({<br/>    key   = string<br/>    value = string<br/>  })</pre> | n/a | yes |
-| <a name="input_consul_ca_cert_secret_arn"></a> [consul\_ca\_cert\_secret\_arn](#input\_consul\_ca\_cert\_secret\_arn) | ARN of the Secrets Manager secret containing the Consul CA certificate. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
 | <a name="input_consul_datacenter"></a> [consul\_datacenter](#input\_consul\_datacenter) | Consul datacenter name. | `string` | `"dc1"` | no |
 | <a name="input_consul_gossip_key_secret_arn"></a> [consul\_gossip\_key\_secret\_arn](#input\_consul\_gossip\_key\_secret\_arn) | ARN of the Secrets Manager secret containing the Consul gossip encryption key. Obtain from consul-enterprise-deploy output. | `string` | n/a | yes |
 | <a name="input_consul_token_secret_arn"></a> [consul\_token\_secret\_arn](#input\_consul\_token\_secret\_arn) | ARN of the Secrets Manager secret containing the Consul ACL token for Nomad. Obtain from consul-enterprise-admin. | `string` | n/a | yes |
@@ -68,7 +67,6 @@ repository from this template:
 | ---- | ---- |
 | [aws_ami.selected](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [aws_route53_zone.nomad](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
-| [aws_secretsmanager_secret.consul_ca_cert](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret) | data source |
 | [aws_secretsmanager_secret.consul_gossip_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret) | data source |
 | [aws_secretsmanager_secret.consul_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret) | data source |
 | [aws_security_group.consul](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |

@@ -54,11 +54,6 @@ variable "nomad_server_instance_type" {
 
 # Consul Integration
 
-variable "consul_ca_cert_secret_arn" {
-  type        = string
-  description = "ARN of the Secrets Manager secret containing the Consul CA certificate. Obtain from consul-enterprise-deploy output."
-}
-
 variable "consul_gossip_key_secret_arn" {
   type        = string
   description = "ARN of the Secrets Manager secret containing the Consul gossip encryption key. Obtain from consul-enterprise-deploy output."
