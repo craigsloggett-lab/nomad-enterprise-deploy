@@ -52,53 +52,6 @@ variable "nomad_server_instance_type" {
   default     = "m5.large"
 }
 
-# Consul Integration
-
-variable "consul_gossip_key_secret_arn" {
-  type        = string
-  description = "ARN of the Secrets Manager secret containing the Consul gossip encryption key. Obtain from consul-enterprise-deploy output."
-}
-
-variable "consul_token_secret_arn" {
-  type        = string
-  description = "ARN of the Secrets Manager secret containing the Consul ACL token for Nomad. Obtain from consul-enterprise-admin."
-}
-
-variable "consul_auto_join_ec2_tag" {
-  type = object({
-    key   = string
-    value = string
-  })
-  description = "EC2 tag used for Consul cloud auto-join. Obtain from consul-enterprise-deploy output."
-}
-
-variable "consul_datacenter" {
-  type        = string
-  description = "Consul datacenter name."
-  default     = "dc1"
-}
-
-variable "consul_version" {
-  type        = string
-  description = "Consul Enterprise release version for the local client agent."
-  default     = "1.22.6+ent"
-}
-
-variable "nomad_server_service_name" {
-  type        = string
-  description = "Consul service name Nomad servers register as. Obtain from consul-enterprise-deploy output."
-}
-
-variable "nomad_client_service_name" {
-  type        = string
-  description = "Consul service name Nomad clients register as. Obtain from consul-enterprise-deploy output."
-}
-
-variable "nomad_snapshot_service_name" {
-  type        = string
-  description = "Consul service name the Nomad snapshot agent registers as. Obtain from consul-enterprise-deploy output."
-}
-
 # Nomad Client Nodes
 
 variable "client_count" {
@@ -111,21 +64,4 @@ variable "nomad_client_instance_type" {
   type        = string
   description = "EC2 instance type for Nomad client nodes."
   default     = "m5.large"
-}
-
-# Vault Integration
-
-variable "vault_url" {
-  type        = string
-  description = "Vault cluster URL (e.g., https://vault.example.com). Obtain from vault-enterprise-deploy output."
-}
-
-variable "vault_tls_ca_bundle_ssm_name" {
-  type        = string
-  description = "SSM parameter name holding the Vault cluster's TLS CA bundle. Obtain from vault-enterprise-deploy output."
-}
-
-variable "vault_iam_role_name" {
-  type        = string
-  description = "Name of the IAM role attached to Vault server nodes. Obtain from vault-enterprise-deploy output."
 }

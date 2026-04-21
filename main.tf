@@ -49,15 +49,39 @@ data "aws_security_group" "consul" {
 }
 
 data "aws_secretsmanager_secret" "consul_gossip_key" {
-  arn = var.consul_gossip_key_secret_arn
+  arn = data.tfe_outputs.consul_enterprise_deploy.values.consul_gossip_key_secret_arn
 }
 
 data "aws_secretsmanager_secret" "consul_token" {
-  arn = var.consul_token_secret_arn
+  arn = data.tfe_outputs.consul_enterprise_deploy.values.consul_token_secret_arn
+}
+
+data "tfe_organization" "this" {
+  name = "craigsloggett-lab"
+}
+
+data "tfe_workspace" "vault_enterprise_deploy" {
+  organization = data.tfe_organization.this.name
+  name         = "vault-enterprise-deploy"
+}
+
+data "tfe_workspace" "consul_enterprise_deploy" {
+  organization = data.tfe_organization.this.name
+  name         = "consul-enterprise-deploy"
+}
+
+data "tfe_outputs" "vault_enterprise_deploy" {
+  organization = data.tfe_organization.this.name
+  workspace    = data.tfe_workspace.vault_enterprise_deploy.name
+}
+
+data "tfe_outputs" "consul_enterprise_deploy" {
+  organization = data.tfe_organization.this.name
+  workspace    = data.tfe_workspace.consul_enterprise_deploy.name
 }
 
 module "nomad" {
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.6.0"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.6.2"
 
   project_name               = var.project_name
   route53_zone               = data.aws_route53_zone.nomad
@@ -75,17 +99,17 @@ module "nomad" {
   consul_security_group    = data.aws_security_group.consul
   consul_gossip_key_secret = data.aws_secretsmanager_secret.consul_gossip_key
   consul_token_secret      = data.aws_secretsmanager_secret.consul_token
-  consul_auto_join_ec2_tag = var.consul_auto_join_ec2_tag
-  consul_datacenter        = var.consul_datacenter
-  consul_version           = var.consul_version
+  consul_auto_join_ec2_tag = data.tfe_outputs.consul_enterprise_deploy.values.consul_auto_join_ec2_tag
+  consul_datacenter        = data.tfe_outputs.consul_enterprise_deploy.values.consul_datacenter
+  consul_version           = data.tfe_outputs.consul_enterprise_deploy.values.consul_version
 
-  nomad_server_service_name   = var.nomad_server_service_name
-  nomad_client_service_name   = var.nomad_client_service_name
-  nomad_snapshot_service_name = var.nomad_snapshot_service_name
+  nomad_server_service_name   = data.tfe_outputs.consul_enterprise_deploy.values.nomad_server_service_name
+  nomad_client_service_name   = data.tfe_outputs.consul_enterprise_deploy.values.nomad_client_service_name
+  nomad_snapshot_service_name = data.tfe_outputs.consul_enterprise_deploy.values.nomad_snapshot_service_name
 
-  vault_url                    = var.vault_url
-  vault_tls_ca_bundle_ssm_name = var.vault_tls_ca_bundle_ssm_name
-  vault_iam_role_name          = var.vault_iam_role_name
+  vault_tls_ca_bundle_ssm_parameter_name = data.tfe_outputs.vault_enterprise_deploy.values.vault_tls_ca_bundle_ssm_parameter_name
+  vault_iam_role_name                    = data.tfe_outputs.vault_enterprise_deploy.values.vault_iam_role_name
+  vault_url                              = data.tfe_outputs.vault_enterprise_deploy.values.vault_url
 
   client_count               = var.client_count
   nlb_internal               = var.nlb_internal
