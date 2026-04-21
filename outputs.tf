@@ -3,6 +3,11 @@ output "nomad_url" {
   value       = module.nomad.nomad_url
 }
 
+output "nomad_version" {
+  description = "Nomad Enterprise version deployed."
+  value       = module.nomad.nomad_version
+}
+
 output "bastion_public_ip" {
   description = "Public IP of the bastion host."
   value       = module.nomad.bastion_public_ip
@@ -11,6 +16,11 @@ output "bastion_public_ip" {
 output "nomad_server_private_ips" {
   description = "Private IPs of the Nomad server nodes."
   value       = module.nomad.nomad_server_private_ips
+}
+
+output "nomad_snapshots_bucket" {
+  description = "S3 bucket for Nomad snapshots."
+  value       = module.nomad.nomad_snapshots_bucket
 }
 
 output "nomad_target_group_arn" {

@@ -85,7 +85,7 @@ module "nomad" {
 
   project_name               = var.project_name
   route53_zone               = data.aws_route53_zone.nomad
-  nomad_license              = var.nomad_license
+  nomad_enterprise_license   = var.nomad_enterprise_license
   ec2_key_pair_name          = var.ec2_key_pair_name
   ec2_ami                    = data.aws_ami.selected
   nomad_server_instance_type = var.nomad_server_instance_type

@@ -13,7 +13,7 @@ variable "route53_zone_name" {
   description = "Name of the existing Route 53 hosted zone."
 }
 
-variable "nomad_license" {
+variable "nomad_enterprise_license" {
   type        = string
   description = "Nomad Enterprise license string."
   sensitive   = true
