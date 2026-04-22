@@ -104,9 +104,9 @@ module "nomad" {
   consul_datacenter        = data.tfe_outputs.consul_enterprise_deploy.values.consul_datacenter
   consul_version           = data.tfe_outputs.consul_enterprise_deploy.values.consul_version
 
-  nomad_server_service_name   = data.tfe_outputs.consul_enterprise_deploy.values.nomad_server_service_name
-  nomad_client_service_name   = data.tfe_outputs.consul_enterprise_deploy.values.nomad_client_service_name
-  nomad_snapshot_service_name = data.tfe_outputs.consul_enterprise_deploy.values.nomad_snapshot_service_name
+  nomad_server_service_name                  = data.tfe_outputs.consul_enterprise_deploy.values.nomad_server_service_name
+  nomad_client_service_name                  = data.tfe_outputs.consul_enterprise_deploy.values.nomad_client_service_name
+  nomad_operator_snapshot_agent_service_name = data.tfe_outputs.consul_enterprise_deploy.values.nomad_operator_snapshot_agent_service_name
 
   vault_tls_ca_bundle_ssm_parameter_name = data.tfe_outputs.vault_enterprise_deploy.values.vault_tls_ca_bundle_ssm_parameter_name
   vault_iam_role_name                    = data.tfe_outputs.vault_enterprise_deploy.values.vault_iam_role_name

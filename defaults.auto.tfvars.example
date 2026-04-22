@@ -18,7 +18,7 @@ consul_token_secret_arn      = "arn:aws:secretsmanager:us-east-1:123456789012:se
 
 nomad_server_service_name   = "nomad-server"
 nomad_client_service_name   = "nomad-client"
-nomad_snapshot_service_name = "nomad-snapshot"
+nomad_operator_snapshot_agent_service_name = "nomad-operator-snapshot-agent"
 
 vault_url                    = "https://vault.example.com"
 vault_tls_ca_bundle_ssm_name = "/lab/vault/tls-ca-bundle"
