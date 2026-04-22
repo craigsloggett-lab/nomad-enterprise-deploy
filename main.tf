@@ -82,7 +82,7 @@ data "tfe_outputs" "consul_enterprise_deploy" {
 
 module "nomad" {
   # tflint-ignore: terraform_module_pinned_source
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=81affe5042d9cff13e542976e692a67d8d900174"
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=25a27ac3e7c9d7eed12b77147728f010f1429a38"
 
   project_name               = var.project_name
   route53_zone               = data.aws_route53_zone.nomad
