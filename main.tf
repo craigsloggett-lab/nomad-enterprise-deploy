@@ -81,11 +81,12 @@ data "tfe_outputs" "consul_enterprise_deploy" {
 }
 
 module "nomad" {
-  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=v0.6.2"
+  # tflint-ignore: terraform_module_pinned_source
+  source = "git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise?ref=25a27ac3e7c9d7eed12b77147728f010f1429a38"
 
   project_name               = var.project_name
   route53_zone               = data.aws_route53_zone.nomad
-  nomad_license              = var.nomad_license
+  nomad_enterprise_license   = var.nomad_enterprise_license
   ec2_key_pair_name          = var.ec2_key_pair_name
   ec2_ami                    = data.aws_ami.selected
   nomad_server_instance_type = var.nomad_server_instance_type
@@ -103,9 +104,9 @@ module "nomad" {
   consul_datacenter        = data.tfe_outputs.consul_enterprise_deploy.values.consul_datacenter
   consul_version           = data.tfe_outputs.consul_enterprise_deploy.values.consul_version
 
-  nomad_server_service_name   = data.tfe_outputs.consul_enterprise_deploy.values.nomad_server_service_name
-  nomad_client_service_name   = data.tfe_outputs.consul_enterprise_deploy.values.nomad_client_service_name
-  nomad_snapshot_service_name = data.tfe_outputs.consul_enterprise_deploy.values.nomad_snapshot_service_name
+  nomad_server_service_name                  = data.tfe_outputs.consul_enterprise_deploy.values.nomad_server_service_name
+  nomad_client_service_name                  = data.tfe_outputs.consul_enterprise_deploy.values.nomad_client_service_name
+  nomad_operator_snapshot_agent_service_name = data.tfe_outputs.consul_enterprise_deploy.values.nomad_operator_snapshot_agent_service_name
 
   vault_tls_ca_bundle_ssm_parameter_name = data.tfe_outputs.vault_enterprise_deploy.values.vault_tls_ca_bundle_ssm_parameter_name
   vault_iam_role_name                    = data.tfe_outputs.vault_enterprise_deploy.values.vault_iam_role_name

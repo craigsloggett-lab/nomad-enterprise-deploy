@@ -33,7 +33,7 @@ repository from this template:
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
-| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | v0.6.2 |
+| <a name="module_nomad"></a> [nomad](#module\_nomad) | git::https://github.com/craigsloggett/terraform-aws-nomad-enterprise | 25a27ac3e7c9d7eed12b77147728f010f1429a38 |
 
 ## Inputs
 
@@ -46,7 +46,7 @@ repository from this template:
 | <a name="input_nlb_internal"></a> [nlb\_internal](#input\_nlb\_internal) | Whether the NLB is internal. | `bool` | `true` | no |
 | <a name="input_nomad_api_allowed_cidrs"></a> [nomad\_api\_allowed\_cidrs](#input\_nomad\_api\_allowed\_cidrs) | CIDR blocks allowed to reach the Nomad API (port 4646) from outside the VPC. Only effective when nlb\_internal is false. | `list(string)` | `[]` | no |
 | <a name="input_nomad_client_instance_type"></a> [nomad\_client\_instance\_type](#input\_nomad\_client\_instance\_type) | EC2 instance type for Nomad client nodes. | `string` | `"m5.large"` | no |
-| <a name="input_nomad_license"></a> [nomad\_license](#input\_nomad\_license) | Nomad Enterprise license string. | `string` | n/a | yes |
+| <a name="input_nomad_enterprise_license"></a> [nomad\_enterprise\_license](#input\_nomad\_enterprise\_license) | Nomad Enterprise license string. | `string` | n/a | yes |
 | <a name="input_nomad_server_instance_type"></a> [nomad\_server\_instance\_type](#input\_nomad\_server\_instance\_type) | EC2 instance type for Nomad server nodes. | `string` | `"m5.large"` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Name prefix for all resources. | `string` | n/a | yes |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | Name of the existing Route 53 hosted zone. | `string` | n/a | yes |
@@ -82,6 +82,8 @@ repository from this template:
 | <a name="output_nomad_intro_token_secret_arn"></a> [nomad\_intro\_token\_secret\_arn](#output\_nomad\_intro\_token\_secret\_arn) | ARN of the Secrets Manager secret for the client introduction ACL token. |
 | <a name="output_nomad_server_private_ips"></a> [nomad\_server\_private\_ips](#output\_nomad\_server\_private\_ips) | Private IPs of the Nomad server nodes. |
 | <a name="output_nomad_snapshot_token_secret_arn"></a> [nomad\_snapshot\_token\_secret\_arn](#output\_nomad\_snapshot\_token\_secret\_arn) | ARN of the Secrets Manager secret for the snapshot agent ACL token. |
+| <a name="output_nomad_snapshots_bucket"></a> [nomad\_snapshots\_bucket](#output\_nomad\_snapshots\_bucket) | S3 bucket for Nomad snapshots. |
 | <a name="output_nomad_target_group_arn"></a> [nomad\_target\_group\_arn](#output\_nomad\_target\_group\_arn) | ARN of the Nomad NLB target group. |
 | <a name="output_nomad_url"></a> [nomad\_url](#output\_nomad\_url) | URL of the Nomad cluster. |
+| <a name="output_nomad_version"></a> [nomad\_version](#output\_nomad\_version) | Nomad Enterprise version deployed. |
 <!-- END_TF_DOCS -->
