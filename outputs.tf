@@ -13,9 +13,9 @@ output "bastion_public_ip" {
   value       = module.nomad.bastion_public_ip
 }
 
-output "nomad_server_private_ips" {
-  description = "Private IPs of the Nomad server nodes."
-  value       = module.nomad.nomad_server_private_ips
+output "nomad_server_asg_name" {
+  description = "Name of the Nomad server Auto Scaling Group."
+  value       = module.nomad.nomad_server_asg_name
 }
 
 output "nomad_snapshots_bucket" {
